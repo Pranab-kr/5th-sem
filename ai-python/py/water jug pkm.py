@@ -1,9 +1,3 @@
-#!/usr/bin/env python
-# coding: utf-8
-
-# In[1]:
-
-
 def pour_water(juga, jugb):
     print("%d\t%d" % (juga, jugb))
 
@@ -28,10 +22,3 @@ max2 = int(input("Enter capacity of Jug B: "))
 fill = int(input("Enter target amount: "))
 
 pour_water(0, 0)
-
-
-# In[ ]:
-
-
-
-

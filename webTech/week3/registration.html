@@ -1,0 +1,201 @@
+<body bgcolor="#E4F0F8">
+    <center><h2>Registration Form</h2></center>
+
+    <form onsubmit="return formVal();">
+        <label for="firstname">
+            <b>First Name (Min 6 char): <font color="red">*</font></b>
+        </label>
+        <input type="text" name="firstname" id="firstname" />
+        <br /><br />
+
+        <label for="lastname">
+            <b>Last Name: <font color="red">*</font></b>
+        </label>
+        <input type="text" name="lastname" id="lastname" />
+        <br /><br />
+
+        <label for="email">
+            <b>Email: <font color="red">*</font></b>
+        </label>
+        <input type="email" name="email" id="email" />
+        <br /><br />
+
+        <label for="pass">
+            <b>Password: <font color="red">*</font></b>
+        </label>
+        <input type="password" name="password" id="pass" />
+        <br /><br />
+
+        <label for="add">
+            <b>Address: <font color="red">*</font></b>
+        </label>
+        <textarea name="address" id="add"></textarea>
+        <br /><br />
+
+        <label for="mobile">
+            <b>Mobile No: <font color="red">*</font></b>
+        </label>
+        <input type="text" name="mobile" id="mobile" />
+        <br /><br />
+
+        <b>Gender: <font color="red">*</font></b>
+
+        <input type="radio" name="gender" id="male" value="male" />
+        <label for="male">Male</label>
+
+        <input type="radio" name="gender" id="female" value="female" />
+        <label for="female">Female</label>
+
+        <input type="radio" name="gender" id="other" value="other" />
+        <label for="other">Other</label>
+
+        <br /><br />
+
+        <input type="submit" value="Submit" />
+        <input type="reset" value="Reset" />
+    </form>
+
+    <script>
+        const formVal = () => {
+            var firstname = document.getElementById("firstname");
+            var lastname = document.getElementById("lastname");
+            var email = document.getElementById("email");
+            var pass = document.getElementById("pass");
+            var add = document.getElementById("add");
+            var mob = document.getElementById("mobile");
+
+            if (notEmpty(firstname, "Can't be empty")) {
+                if (
+                    isAlphabet(
+                        firstname,
+                        "Please enter only letters for First Name",
+                    )
+                ) {
+                    if (lengthRestriction(firstname, 6)) {
+                        if (
+                            isAlphabet(
+                                lastname,
+                                "Please enter only letters for Last Name",
+                            )
+                        ) {
+                            if (
+                                emailVal(
+                                    email,
+                                    "Please enter a valid email address",
+                                )
+                            ) {
+                                if (lengthRestriction(pass, 6)) {
+                                    if (
+                                        isAlphanumeric(
+                                            pass,
+                                            "Please enter only letters and numbers for password",
+                                        )
+                                    ) {
+                                        if (
+                                            notEmpty(
+                                                add,
+                                                "Please enter the address",
+                                            )
+                                        ) {
+                                            if (
+                                                isNumeric(
+                                                    mob,
+                                                    "Please enter a valid mobile number",
+                                                )
+                                            ) {
+                                                if (
+                                                    lengthRestication(
+                                                        mob,
+                                                        10,
+                                                        10,
+                                                    )
+                                                ) {
+                                                    return true;
+                                                }
+                                            }
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+
+            return false;
+        };
+
+        function notEmpty(elem, helpMsg) {
+            if (elem.value.length === 0) {
+                alert(helpMsg);
+                elem.focus();
+                return false;
+            }
+            return true;
+        }
+
+        function isNumeric(elem, helpMsg) {
+            var numericEx = /^[0-9]+$/;
+            if (elem.value.match(numericEx)) {
+                return true;
+            } else {
+                alert(helpMsg);
+                elem.focus();
+                return false;
+            }
+        }
+
+        function isAlphabet(elem, helpMsg) {
+            var alphaEx = /^[a-zA-Z]+$/;
+            if (elem.value.match(alphaEx)) return true;
+            else {
+                alert(helpMsg);
+                elem.focus();
+                return false;
+            }
+        }
+
+        function isAlphanumeric(elem, helpMsg) {
+            var alphaEx = /^[0-9a-zA-Z]+$/;
+            if (elem.value.match(alphaEx)) return true;
+            else {
+                alert(helpMsg);
+                elem.focus();
+                return false;
+            }
+        }
+
+        function lengthRestriction(elem, min) {
+            var ip = elem.value;
+            if (ip.length >= min) {
+                return true;
+            } else {
+                alert("Please enter minimum " + min + " characters");
+                elem.focus();
+                return false;
+            }
+        }
+
+        function emailVal(elem, helpMsg) {
+            var emailExp = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
+
+            if (elem.value.match(emailExp)) return true;
+            else {
+                alert(helpMsg);
+                elem.focus();
+                return false;
+            }
+        }
+
+        function lengthRestication(elem, min, max) {
+            var ip = elem.value;
+
+            if (ip.length >= min && ip.length <= max) return true;
+            else {
+                alert("Please enter exactly 10 numbers");
+                elem.focus();
+                return false;
+            }
+        }
+    </script>
+</body>
