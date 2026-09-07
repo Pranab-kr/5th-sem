@@ -1,0 +1,50 @@
+<!doctype html>
+<html>
+    <head>
+        <title>Fibonacci Series (Recursive)</title>
+    </head>
+
+    <body>
+        <h2>Fibonacci Series Generator</h2>
+
+        <p>Enter the number of terms:</p>
+
+        <input type="number" id="numTerms" min="1" value="10" />
+
+        <button onclick="generateFibonacci()">Generate</button>
+
+        <p id="result"></p>
+
+        <script>
+            // Recursive Fibonacci function
+            function fibonacci(n) {
+                if (n <= 1) return n; // Base case
+
+                return fibonacci(n - 1) + fibonacci(n - 2); // Recursive formula
+            }
+
+            function generateFibonacci() {
+                let n = parseInt(document.getElementById("numTerms").value);
+
+                if (isNaN(n) || n <= 0) {
+                    alert("Please enter a valid positive number.");
+                    return;
+                }
+
+                let series = [];
+
+                for (let i = 0; i < n; i++) {
+                    series.push(fibonacci(i)); // Call recursive function
+                }
+
+                document.getElementById("result").innerHTML =
+                    "<strong>Fibonacci Series:</strong> " + series.join(", ");
+
+                // Log first 10 Fibonacci numbers in console
+                for (let i = 0; i < 10; i++) {
+                    console.log(fibonacci(i));
+                }
+            }
+        </script>
+    </body>
+</html>

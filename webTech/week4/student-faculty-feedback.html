@@ -1,0 +1,355 @@
+<!doctype html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>Student Faculty Feedback Form</title>
+
+        <style>
+            * {
+                box-sizing: border-box;
+                margin: 0;
+                padding: 0;
+                font-family: Arial, sans-serif;
+            }
+
+            body {
+                background: #f2f5f9;
+                padding: 30px;
+            }
+
+            .container {
+                max-width: 650px;
+                margin: auto;
+                background: white;
+                padding: 30px;
+                border-radius: 12px;
+                box-shadow: 0 5px 20px rgba(0, 0, 0, 0.15);
+            }
+
+            h1 {
+                text-align: center;
+                color: #1e3a8a;
+                margin-bottom: 10px;
+            }
+
+            .subtitle {
+                text-align: center;
+                color: #666;
+                margin-bottom: 25px;
+            }
+
+            .form-group {
+                margin-bottom: 20px;
+            }
+
+            label {
+                display: block;
+                font-weight: bold;
+                margin-bottom: 8px;
+                color: #333;
+            }
+
+            input,
+            select,
+            textarea {
+                width: 100%;
+                padding: 11px;
+                border: 1px solid #ccc;
+                border-radius: 6px;
+                font-size: 15px;
+            }
+
+            input:focus,
+            select:focus,
+            textarea:focus {
+                outline: none;
+                border-color: #2563eb;
+            }
+
+            textarea {
+                resize: vertical;
+                min-height: 100px;
+            }
+
+            /* Rating Section */
+            .rating {
+                display: flex;
+                gap: 15px;
+                flex-wrap: wrap;
+            }
+
+            .rating label {
+                font-weight: normal;
+                cursor: pointer;
+            }
+
+            .rating input {
+                width: auto;
+                margin-right: 5px;
+            }
+
+            /* Radio Buttons */
+            .radio-group {
+                display: flex;
+                gap: 20px;
+                flex-wrap: wrap;
+            }
+
+            .radio-group label {
+                font-weight: normal;
+            }
+
+            .radio-group input {
+                width: auto;
+                margin-right: 5px;
+            }
+
+            /* Submit Button */
+            button {
+                width: 100%;
+                padding: 13px;
+                background: #2563eb;
+                color: white;
+                border: none;
+                border-radius: 6px;
+                font-size: 17px;
+                cursor: pointer;
+            }
+
+            button:hover {
+                background: #1d4ed8;
+            }
+
+            .success {
+                display: none;
+                margin-top: 20px;
+                padding: 12px;
+                background: #dcfce7;
+                color: #166534;
+                border-radius: 6px;
+                text-align: center;
+            }
+        </style>
+    </head>
+
+    <body>
+        <div class="container">
+            <h1>Student Faculty Feedback</h1>
+
+            <p class="subtitle">Please provide your valuable feedback</p>
+
+            <form id="feedbackForm">
+                <!-- Student Name -->
+                <div class="form-group">
+                    <label for="name">Student Name</label>
+                    <input
+                        type="text"
+                        id="name"
+                        placeholder="Enter your name"
+                        required
+                    />
+                </div>
+
+                <!-- Roll Number -->
+                <div class="form-group">
+                    <label for="roll">Roll Number</label>
+                    <input
+                        type="text"
+                        id="roll"
+                        placeholder="Enter your roll number"
+                        required
+                    />
+                </div>
+
+                <!-- Semester -->
+                <div class="form-group">
+                    <label for="semester">Semester</label>
+                    <select id="semester" required>
+                        <option value="">-- Select Semester --</option>
+                        <option>Semester 1</option>
+                        <option>Semester 2</option>
+                        <option>Semester 3</option>
+                        <option>Semester 4</option>
+                        <option>Semester 5</option>
+                        <option>Semester 6</option>
+                        <option>Semester 7</option>
+                        <option>Semester 8</option>
+                    </select>
+                </div>
+
+                <!-- Subject -->
+                <div class="form-group">
+                    <label for="subject">Choose Subject</label>
+                    <select id="subject" required>
+                        <option value="">-- Select Subject --</option>
+                        <option>Data Structures and Algorithms</option>
+                        <option>Database Management System</option>
+                        <option>Operating System</option>
+                        <option>Computer Networks</option>
+                        <option>Object Oriented Programming</option>
+                        <option>Software Engineering</option>
+                        <option>Computer Organization</option>
+                    </select>
+                </div>
+
+                <!-- Faculty -->
+                <div class="form-group">
+                    <label for="faculty">Faculty Name</label>
+                    <select id="faculty" required>
+                        <option value="">-- Select Faculty --</option>
+                        <option>Dr. Amit Kumar</option>
+                        <option>Prof. Rahul Sharma</option>
+                        <option>Dr. Priya Das</option>
+                        <option>Prof. Ankit Roy</option>
+                        <option>Dr. Sneha Ghosh</option>
+                    </select>
+                </div>
+
+                <!-- Teaching Rating -->
+                <div class="form-group">
+                    <label>How would you rate the faculty's teaching?</label>
+
+                    <div class="rating">
+                        <label>
+                            <input
+                                type="radio"
+                                name="rating"
+                                value="1"
+                                required
+                            />
+                            1 - Poor
+                        </label>
+
+                        <label>
+                            <input type="radio" name="rating" value="2" />
+                            2 - Fair
+                        </label>
+
+                        <label>
+                            <input type="radio" name="rating" value="3" />
+                            3 - Good
+                        </label>
+
+                        <label>
+                            <input type="radio" name="rating" value="4" />
+                            4 - Very Good
+                        </label>
+
+                        <label>
+                            <input type="radio" name="rating" value="5" />
+                            5 - Excellent
+                        </label>
+                    </div>
+                </div>
+
+                <!-- Faculty Communication -->
+                <div class="form-group">
+                    <label> How well does the faculty explain concepts? </label>
+
+                    <div class="radio-group">
+                        <label>
+                            <input
+                                type="radio"
+                                name="explanation"
+                                value="Excellent"
+                                required
+                            />
+                            Excellent
+                        </label>
+
+                        <label>
+                            <input
+                                type="radio"
+                                name="explanation"
+                                value="Good"
+                            />
+                            Good
+                        </label>
+
+                        <label>
+                            <input
+                                type="radio"
+                                name="explanation"
+                                value="Average"
+                            />
+                            Average
+                        </label>
+
+                        <label>
+                            <input
+                                type="radio"
+                                name="explanation"
+                                value="Poor"
+                            />
+                            Poor
+                        </label>
+                    </div>
+                </div>
+
+                <!-- Course Content -->
+                <div class="form-group">
+                    <label> Is the course content covered properly? </label>
+
+                    <div class="radio-group">
+                        <label>
+                            <input
+                                type="radio"
+                                name="course"
+                                value="Yes"
+                                required
+                            />
+                            Yes
+                        </label>
+
+                        <label>
+                            <input
+                                type="radio"
+                                name="course"
+                                value="Partially"
+                            />
+                            Partially
+                        </label>
+
+                        <label>
+                            <input type="radio" name="course" value="No" />
+                            No
+                        </label>
+                    </div>
+                </div>
+
+                <!-- Comments -->
+                <div class="form-group">
+                    <label for="comments">
+                        Additional Comments / Suggestions
+                    </label>
+
+                    <textarea
+                        id="comments"
+                        placeholder="Write your feedback or suggestions..."
+                    ></textarea>
+                </div>
+
+                <!-- Submit -->
+                <button type="submit">Submit Feedback</button>
+            </form>
+
+            <div class="success" id="successMessage">
+                ✅ Thank you! Your feedback has been submitted successfully.
+            </div>
+        </div>
+
+        <script>
+            const form = document.getElementById("feedbackForm");
+            const successMessage = document.getElementById("successMessage");
+
+            form.addEventListener("submit", function (event) {
+                event.preventDefault();
+
+                successMessage.style.display = "block";
+
+                form.reset();
+            });
+        </script>
+    </body>
+</html>

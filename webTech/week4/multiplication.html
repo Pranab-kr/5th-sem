@@ -1,0 +1,28 @@
+<!doctype html>
+<html>
+    <head>
+        <title>Multiplication Table</title>
+    </head>
+
+    <body>
+        <script>
+            var n = prompt("Enter a positive value of n:", "");
+
+            if (!isNaN(n) && n > 0) {
+                var table = "";
+
+                for (var i = 1; i <= 10; i++) {
+                    var number = n * i;
+                    table += n + " x " + i + " = " + number + "\n";
+                }
+
+                alert(table);
+
+                document.write("Multiplication Table display using alert.");
+                document.write("<br>");
+            } else {
+                alert("Invalid Input! Please enter a positive number!");
+            }
+        </script>
+    </body>
+</html>
