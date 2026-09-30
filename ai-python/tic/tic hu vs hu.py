@@ -1,10 +1,5 @@
-#!/usr/bin/env python
-# coding: utf-8
+# Tic Tac Toe hu vs hu
 
-# In[2]:
-
-
-# Tic Tac Toe
 
 def main():
     # This is main func
@@ -12,13 +7,15 @@ def main():
     board = create_grid()
     printpretty(board)
     symbol_1, symbol_2 = sym()
-    isfull(board, symbol_1, symbol_2)   # The func that starts the game
+    isfull(board, symbol_1, symbol_2)  # The func that starts the game
 
 
 def intro():
     print("Hello! Welcome to Tic Tac Toe game!")
     print("\n")
-    print("Rules: Player 1 and 2 are represented by X and O. Matching any three in a row, column or diagonal wins.")
+    print(
+        "Rules: Player 1 and 2 are represented by X and O. Matching any three in a row, column or diagonal wins."
+    )
     print("\n")
     input("Press Enter to continue...")
     print("\n")
@@ -27,9 +24,7 @@ def intro():
 def create_grid():
     # This func creates the blank playboard
     print("Here is the play Board:")
-    board = [[" ", " ", " "],
-             [" ", " ", " "],
-             [" ", " ", " "]]
+    board = [[" ", " ", " "], [" ", " ", " "], [" ", " ", " "]]
     return board
 
 
@@ -158,14 +153,16 @@ def iswinner(board, symbol_1, symbol_2, count):
             return winner
 
     # Check diagonals
-    if (board[0][0] == board[1][1] == board[2][2] == symbol_1) or \
-       (board[0][2] == board[1][1] == board[2][0] == symbol_1):
+    if (board[0][0] == board[1][1] == board[2][2] == symbol_1) or (
+        board[0][2] == board[1][1] == board[2][0] == symbol_1
+    ):
         winner = False
         print("Player " + symbol_1 + " you won!!")
         return winner
 
-    if (board[0][0] == board[1][1] == board[2][2] == symbol_2) or \
-       (board[0][2] == board[1][1] == board[2][0] == symbol_2):
+    if (board[0][0] == board[1][1] == board[2][2] == symbol_2) or (
+        board[0][2] == board[1][1] == board[2][0] == symbol_2
+    ):
         winner = False
         print("Player " + symbol_2 + " you won!!")
         return winner
@@ -191,16 +188,3 @@ def report(count, winner, symbol_1, symbol_2):
 
 
 main()
-
-
-# In[ ]:
-
-
-
-
-
-# In[ ]:
-
-
-
-
