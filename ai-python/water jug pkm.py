@@ -1,43 +1,51 @@
-def pour_water(juga, jugb):
-    print("%d\t%d" % (juga, jugb))
+def water_jug(jugA, jugB, maxA, maxB, target, visited):
 
-    if jugb == fill:
+    if (jugA, jugB) in visited:
+        return False
+
+    visited.add((jugA, jugB))
+
+    print("Jug A =", jugA, ", Jug B =", jugB)
+
+    if jugA == target or jugB == target:
         print("Target achieved!")
-        return
-    elif jugb == max2:
-        pour_water(0, juga)
-    elif juga != 0 and jugb == 0:
-        pour_water(0, juga)
-    elif juga == fill:
-        pour_water(juga, 0)
-    elif juga < max1:
-        pour_water(max1, jugb)
-    elif juga < (max2 - jugb):
-        pour_water(0, juga + jugb)
-    else:
-        pour_water(juga - (max2 - jugb), jugb + (max2 - jugb))
+        return True
+
+    if water_jug(maxA, jugB, maxA, maxB, target, visited):
+        return True
+
+    if water_jug(jugA, maxB, maxA, maxB, target, visited):
+        return True
+
+    if water_jug(0, jugB, maxA, maxB, target, visited):
+        return True
+
+    if water_jug(jugA, 0, maxA, maxB, target, visited):
+        return True
+
+    transfer = min(jugA, maxB - jugB)
+
+    if water_jug(jugA - transfer, jugB + transfer, maxA, maxB, target, visited):
+        return True
+
+    transfer = min(jugB, maxA - jugA)
+
+    if water_jug(jugA + transfer, jugB - transfer, maxA, maxB, target, visited):
+        return True
+
+    return False
 
 
-max1 = int(input("Enter capacity of Jug A: "))
-max2 = int(input("Enter capacity of Jug B: "))
-fill = int(input("Enter target amount: "))
+maxA = int(input("Enter maximum capacity of Jug A: "))
+maxB = int(input("Enter maximum capacity of Jug B: "))
+target = int(input("Enter the quantity to obtain: "))
 
-pour_water(0, 0)
+if target > maxA and target > maxB:
+    print("Target cannot be obtained in either jug.")
+else:
+    print("\nSteps:")
 
-# Enter capacity of Jug A: 5
-# Enter capacity of Jug B: 12
-# Enter target amount: 1
-# 0       0
-# 5       0
-# 0       5
-# 5       5
-# 0       10
-# 5       10
-# 3       12
-# 0       3
-# 5       3
-# 0       8
-# 5       8
-# 1       12
-# 0       1
-# Target achieved!
+    visited = set()
+
+    if not water_jug(0, 0, maxA, maxB, target, visited):
+        print("No solution exists.")
