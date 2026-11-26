@@ -1,0 +1,11 @@
+# Core packages used by the practical scripts (q1-q8) and AI_Practical_PCA2.ipynb
+geneticalgorithm==1.0.2
+numpy==2.5.5
+pandas==3.1.1
+scikit-learn==1.9.1
+
+# Runtime dependency imported by geneticalgorithm for convergence plotting
+matplotlib==3.11.2
+
+# Jupyter kernel support for running AI_Practical_PCA2.ipynb
+ipykernel==7.4.0

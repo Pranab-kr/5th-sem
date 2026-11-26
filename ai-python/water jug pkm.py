@@ -1,51 +1,79 @@
-def water_jug(jugA, jugB, maxA, maxB, target, visited):
+from collections import deque
 
-    if (jugA, jugB) in visited:
+
+def water_jug(maxA, maxB, target):
+    if maxA < 0 or maxB < 0 or target < 0:
+        print("Capacities and target must be non-negative integers.")
         return False
 
-    visited.add((jugA, jugB))
+    if target > maxA and target > maxB:
+        print("Target cannot be obtained in either jug.")
+        return False
 
-    print("Jug A =", jugA, ", Jug B =", jugB)
+    start = (0, 0)
+    queue = deque([start])
+    parent = {start: None}
+    goal_state = None
 
-    if jugA == target or jugB == target:
-        print("Target achieved!")
-        return True
+    while queue:
+        jugA, jugB = queue.popleft()
 
-    if water_jug(maxA, jugB, maxA, maxB, target, visited):
-        return True
+        if jugA == target or jugB == target:
+            goal_state = (jugA, jugB)
+            break
 
-    if water_jug(jugA, maxB, maxA, maxB, target, visited):
-        return True
+        pour_A_to_B = min(jugA, maxB - jugB)
+        pour_B_to_A = min(jugB, maxA - jugA)
 
-    if water_jug(0, jugB, maxA, maxB, target, visited):
-        return True
+        next_states = [
+            (maxA, jugB),
+            (jugA, maxB),
+            (0, jugB),
+            (jugA, 0),
+            (jugA - pour_A_to_B, jugB + pour_A_to_B),
+            (jugA + pour_B_to_A, jugB - pour_B_to_A),
+        ]
 
-    if water_jug(jugA, 0, maxA, maxB, target, visited):
-        return True
+        for state in next_states:
+            if state not in parent:
+                parent[state] = (jugA, jugB)
+                queue.append(state)
 
-    transfer = min(jugA, maxB - jugB)
-
-    if water_jug(jugA - transfer, jugB + transfer, maxA, maxB, target, visited):
-        return True
-
-    transfer = min(jugB, maxA - jugA)
-
-    if water_jug(jugA + transfer, jugB - transfer, maxA, maxB, target, visited):
-        return True
-
-    return False
-
-
-maxA = int(input("Enter maximum capacity of Jug A: "))
-maxB = int(input("Enter maximum capacity of Jug B: "))
-target = int(input("Enter the quantity to obtain: "))
-
-if target > maxA and target > maxB:
-    print("Target cannot be obtained in either jug.")
-else:
-    print("\nSteps:")
-
-    visited = set()
-
-    if not water_jug(0, 0, maxA, maxB, target, visited):
+    if goal_state is None:
         print("No solution exists.")
+        return False
+
+    path = []
+    cur = goal_state
+    while cur is not None:
+        path.append(cur)
+        cur = parent[cur]
+    path.reverse()
+
+    print("\nSteps:")
+    for jugA, jugB in path:
+        print("Jug A =", jugA, ", Jug B =", jugB)
+    print("Target achieved!")
+    return True
+
+
+if __name__ == "__main__":
+    try:
+        maxA = int(input("Enter maximum capacity of Jug A: "))
+        maxB = int(input("Enter maximum capacity of Jug B: "))
+        target = int(input("Enter the quantity to obtain: "))
+        water_jug(maxA, maxB, target)
+    except ValueError:
+        print("Please enter valid integer values.")
+
+# Enter maximum capacity of Jug A: 4
+# Enter maximum capacity of Jug B: 3
+# Enter the quantity to obtain: 2
+
+# Steps:
+# Jug A = 0 , Jug B = 0
+# Jug A = 0 , Jug B = 3
+# Jug A = 3 , Jug B = 0
+# Jug A = 3 , Jug B = 3
+# Jug A = 4 , Jug B = 2
+# Target achieved!

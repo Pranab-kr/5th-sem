@@ -2,10 +2,17 @@ import math
 
 
 # Alpha-Beta Pruning implementation
-def alpha_beta_pruning(depth, nodeIndex, maximizingPlayer, values, alpha, beta):
+def alpha_beta_pruning(
+    depth, nodeIndex, maximizingPlayer, values, alpha, beta, targetDepth=None
+):
+    if targetDepth is None:
+        n = len(values)
+        if n == 0 or (n & (n - 1)) != 0:
+            raise ValueError("Number of leaf values must be a non-zero power of 2.")
+        targetDepth = int(math.log2(n))
 
     # Terminal node (leaf node)
-    if depth == 3:
+    if depth == targetDepth:
         return values[nodeIndex]
 
     if maximizingPlayer:
@@ -13,12 +20,12 @@ def alpha_beta_pruning(depth, nodeIndex, maximizingPlayer, values, alpha, beta):
 
         # Recursively call the function for the next depth
         for i in range(2):
-            eval = alpha_beta_pruning(
-                depth + 1, nodeIndex * 2 + i, False, values, alpha, beta
+            val = alpha_beta_pruning(
+                depth + 1, nodeIndex * 2 + i, False, values, alpha, beta, targetDepth
             )
 
-            maxEval = max(maxEval, eval)
-            alpha = max(alpha, eval)
+            maxEval = max(maxEval, val)
+            alpha = max(alpha, val)
 
             # Beta pruning
             if beta <= alpha:
@@ -31,12 +38,12 @@ def alpha_beta_pruning(depth, nodeIndex, maximizingPlayer, values, alpha, beta):
 
         # Recursively call the function for the next depth
         for i in range(2):
-            eval = alpha_beta_pruning(
-                depth + 1, nodeIndex * 2 + i, True, values, alpha, beta
+            val = alpha_beta_pruning(
+                depth + 1, nodeIndex * 2 + i, True, values, alpha, beta, targetDepth
             )
 
-            minEval = min(minEval, eval)
-            beta = min(beta, eval)
+            minEval = min(minEval, val)
+            beta = min(beta, val)
 
             # Alpha pruning
             if beta <= alpha:

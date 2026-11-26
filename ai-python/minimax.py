@@ -46,9 +46,13 @@ def minimax(curDepth, nodeIndex, maxTurn, scores, targetDepth):
 
 
 # Driver code
-scores = [3, 5, 2, 9, 12, 5, 23, 23]
+if __name__ == "__main__":
+    scores = [3, 5, 2, 9, 12, 5, 23, 23]
 
-treeDepth = math.log(len(scores), 2)
+    if len(scores) == 0 or (len(scores) & (len(scores) - 1)) != 0:
+        raise ValueError("Number of leaf scores must be a non-zero power of 2.")
 
-print("The optimal value is : ", end="")
-print(minimax(0, 0, True, scores, treeDepth))
+    treeDepth = int(math.log2(len(scores)))
+
+    optimal_value = minimax(0, 0, True, scores, treeDepth)
+    print("The optimal value is :", optimal_value)

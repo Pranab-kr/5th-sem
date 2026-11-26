@@ -34,7 +34,7 @@ def a_star(start_node, stop_node):
     while open_set:
 
         # Find node with minimum f(n) = g(n) + h(n)
-        n = min(open_set, key=lambda node: g[node] + heuristic[node])
+        n = min(open_set, key=lambda node: g[node] + heuristic.get(node, 0))
 
         # Goal reached
         if n == stop_node:
@@ -89,9 +89,10 @@ def a_star(start_node, stop_node):
     return None
 
 
-# Start and goal
-start_node = "A"
-goal_node = "G"
+if __name__ == "__main__":
+    # Start and goal
+    start_node = "A"
+    goal_node = "G"
 
-# Run A*
-a_star(start_node, goal_node)
+    # Run A*
+    a_star(start_node, goal_node)
